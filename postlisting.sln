@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2035
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "postlisting", "postlisting\postlisting.csproj", "{0AF15BD8-20BE-4316-858E-8755968D4B4B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0AF15BD8-20BE-4316-858E-8755968D4B4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AF15BD8-20BE-4316-858E-8755968D4B4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AF15BD8-20BE-4316-858E-8755968D4B4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AF15BD8-20BE-4316-858E-8755968D4B4B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F11C2082-39C0-4E09-9768-A6BC55A281EB}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,47 @@
+﻿/*
+ * Needs a reference to ebay.Service (not web reference) (presumes the .NET SDK has been installed)
+ * 
+ */
+using eBay.Service.Core.Soap;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace postlisting
+{
+    class EbayCalls
+    {
+        public static eBayAPIInterfaceService eBayServiceCall(string CallName)
+        {
+            //string endpoint = "https://api.sandbox.ebay.com/wsapi";
+            string endpoint = AppSettingsHelper.Endpoint;
+            string siteId = "0";
+            string appId = AppSettingsHelper.AppID;     // use your app ID
+            string devId = AppSettingsHelper.DevID;     // use your dev ID
+            string certId = AppSettingsHelper.CertID;   // use your cert ID
+            string version = "965";
+            // Build the request URL
+            string requestURL = endpoint
+            + "?callname=" + CallName
+            + "&siteid=" + siteId
+            + "&appid=" + appId
+            + "&version=" + version
+            + "&routing=default";
+
+            eBayAPIInterfaceService service = new eBayAPIInterfaceService();
+            // Assign the request URL to the service locator.
+            service.Url = requestURL;
+            // Set credentials
+            service.RequesterCredentials = new CustomSecurityHeaderType();
+            service.RequesterCredentials.eBayAuthToken = AppSettingsHelper.Token;    // use your token
+            service.RequesterCredentials.Credentials = new UserIdPasswordType();
+            service.RequesterCredentials.Credentials.AppId = appId;
+            service.RequesterCredentials.Credentials.DevId = devId;
+            service.RequesterCredentials.Credentials.AuthCert = certId;
+            return service;
+        }
+
+    }
+}
