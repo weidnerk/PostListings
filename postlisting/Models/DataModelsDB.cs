@@ -20,16 +20,31 @@ namespace postlisting.Models
         {
         }
 
-        public DbSet<SellerOrderHistory> EbayOrders { get; set; }
+        public DbSet<ReadyToList> ItemsToList { get; set; }
 
-        public void StoreOrder(SellerOrderHistory order)
+        public void StoreOrder(ReadyToList order)
         {
-            this.EbayOrders.Add(order);
+            this.ItemsToList.Add(order);
             this.SaveChanges();
         }
-        public void RemoveOrder(string ebayItemId)
+
+        public bool UpdateListedItemID(int sourceID, string supplierItemID, string listedItemID)
         {
-            Database.ExecuteSqlCommand("delete from SellerOrderHistory where itemId = '" + ebayItemId + "'");
+            bool ret = false;
+            var rec = this.ItemsToList.FirstOrDefault(r => r.SourceID == sourceID && r.SupplierItemId == supplierItemID);
+            if (rec != null)
+            {
+                ret = true;
+                rec.ListedItemID = listedItemID;
+
+                using (var context = new DataModelsDB())
+                {
+                    // Pass the entity to Entity Framework and mark it as modified
+                    context.Entry(rec).State = EntityState.Modified;
+                    context.SaveChanges();
+                }
+            }
+            return ret;
         }
     }
 }

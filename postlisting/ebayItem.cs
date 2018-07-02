@@ -25,8 +25,9 @@ namespace postlisting
         ///     FREE shipping
         ///     buyer pays for return shipping
         /// </summary>
-        public static void VerifyAddItemRequest(string title, string description, string categoryID, double price, List<string> pictureURLs)
+        public static string VerifyAddItemRequest(string title, string description, string categoryID, double price, List<string> pictureURLs)
         {
+            string listedItemID = null;
             try
             {
                 //pictureURLs = new List<string>(){
@@ -107,12 +108,14 @@ namespace postlisting
                     Console.WriteLine("=====================================");
                     Console.WriteLine("Add Item Verified");
                     Console.WriteLine("=====================================");
-                    AddItemRequest(item);
+                    listedItemID = AddItemRequest(item);
                 }
+                return listedItemID;
             }
             catch (Exception exc)
             {
                 string s = exc.Message;
+                return null;
             }
         }
         protected static ShippingDetailsType GetShippingDetail()
@@ -142,7 +145,7 @@ namespace postlisting
         /// Add item to eBay. Once verified.
         /// </summary>
         /// <param name="item">Accepts ItemType object from VerifyAddItem method.</param>
-        public static void AddItemRequest(ItemType item)
+        public static string AddItemRequest(ItemType item)
         {
             eBayAPIInterfaceService service = EbayCalls.eBayServiceCall("AddItem");
 
@@ -156,6 +159,7 @@ namespace postlisting
 
             Console.WriteLine("Item Added");
             Console.WriteLine("ItemID: {0}", response.ItemID); // Item ID
+            return response.ItemID;
         }
 
     }
